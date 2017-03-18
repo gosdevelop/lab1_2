@@ -69,7 +69,7 @@ public class Purchase {
 	}
 
 	public Collection<PurchaseItem> getItems() {
-		return (Collection<PurchaseItem>) Collections
+		return Collections
 				.unmodifiableCollection(items);
 	}
 
