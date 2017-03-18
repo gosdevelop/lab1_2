@@ -24,15 +24,14 @@ public class BookKeeper {
 	private TaxCalculationInterface taxCalculationInterface = new TaxCalculation();
 
 	public Invoice issuance(InvoiceRequest invoiceRequest, List<RequestItem> items) {
-		Invoice invoice = invoiceFactory.createNewInvoice(invoiceRequest.getClientData());
+		Invoice invoice = invoiceFactory.create(invoiceRequest.getClientData());
 
 		for (RequestItem item : items) {
 			Money net = item.getTotalCost();
 
 			Tax tax = taxCalculationInterface.calculate(item.getProductData().getType(), net);
 
-			InvoiceLine invoiceLine = new InvoiceLine(item.getProductData(),
-					item.getQuantity(), net, tax);
+			InvoiceLine invoiceLine = new InvoiceLine(item.getProductData(), item.getQuantity(), net, tax);
 			invoice.addItem(invoiceLine);
 		}
 
